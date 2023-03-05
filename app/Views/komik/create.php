@@ -6,7 +6,7 @@
         <div class="col-8">
             <h2 class="my-3">Form Tambah Data Komik</h2>
             <!-- list errors from validation -->
-            <form action="/komik/save" method="post">
+            <form action="/komik/save" method="post" enctype="multipart/form-data">
                 <?= csrf_field(); ?>
                 <div class="row mb-3">
                     <label for="judul" class="col-sm-2 col-form-label">Judul</label>
@@ -37,8 +37,14 @@
                 </div>
                 <div class="row mb-3">
                     <label for="sampul" class="col-sm-2 col-form-label">Sampul</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="sampul" name="sampul">
+                    <div class="col-sm-2">
+                        <img src="/img/default.jpg" class="img-thumbnail img-preview">
+                    </div>
+                    <div class="col-sm-8">
+                        <input type="file" class="form-control <?= (validation_show_error('sampul')) ? 'is-invalid' : ''; ?>" id="sampul" name="sampul" onchange="previewImg()">
+                        <div class="invalid-feedback">
+                            <?= validation_show_error('sampul'); ?>
+                        </div>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Tambah Data</button>
